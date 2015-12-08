@@ -55,32 +55,75 @@ function linkedListGenerator(){
     }
 
     return currentNode;
-
-
-
-
   };
 
   module.remove = function(number){
+    if(module.get(number)===module.getHead()){
+        head=module.get(number+1);
 
-    if(module.get(number)===getHead()){
-      head=module.get(number+1);
+        console.log(head);
+        console.log('the head is true');
+        return head;
     }
-    else if (module.get(number)===getTail()){
-      tail = module.get(number-1);
-      getTail().next=null;
+    else if(module.get(number)===module.getTail()){
+        tail = module.get(number-1);
+        tail.next = null;
+        console.log(tail);
+        console.log('the tail is true also');
+        return tail;
     }
+
+    else if(module.get(number)===false){
+        return false;
+    }
+
     else{
-      var thePrevNumFromRemoveNum = module.get(number-1);
-
-      thePrevNumFromRemoveNum.next = module.get(number+1);
+        var prior = module.get(number-1);
+        var after = module.get(number+1);
+        prior.next = after;
+        console.log(prior);
+        console.log(after);
+        console.log(head);
     }
 
 
   };
 
+  module.createNode = function(Value){
+    var newNodeObject = {
+      value:Value,
+      next:null
+    };
+    return newNodeObject;
+  };
 
   module.insert = function(Value,number){
+
+    if(module.get(number)===module.getHead()){
+        var insideTheNode = module.createNode(Value);
+        insideTheNode.next = module.get(0);
+        head = insideTheNode;
+        console.log(insideTheNode);
+        console.log(head);
+        return insideTheNoede;
+    }
+    else if(module.get(number)===module.getTail()){
+        var willBeTheBack = module.createNode(Value);
+        var theBack = module.getTail();
+        theBack.next = willBeTheBack;
+        tail = willBeTheBack;
+        console.log(theBack);
+        console.log(tail);
+        return willBeTheBack;
+    }
+
+    else {
+        var inTheMiddle = module.createNode(Value);
+        inTheMiddle.next = module.get(number+1);
+        module.get(number).next =inTheMiddle;
+        console.log(inTheMiddle);
+    }
+
 
   };
   return module;
@@ -94,5 +137,6 @@ one.add('man');
 one.add('Playstation');
 one.add('console');
 
+one.insert('kainoa',2);
+console.log(one.getHead());
 
-one.get(1);
