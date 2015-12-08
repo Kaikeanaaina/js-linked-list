@@ -29,7 +29,6 @@ function linkedListGenerator(){
     if(head===null&&tail===null){
       head=newNodeObject;
       tail=newNodeObject;
-      console.log(head,'head');
       return newNodeObject;
     }
     else{
@@ -40,21 +39,43 @@ function linkedListGenerator(){
   };
 
   module.get = function(number){
-    var i=1;
+    var i=0;
     if(number===0){
-     return linkedListGenerator().getHead();
+     return head;
     }
-      var currentNode = head;
-      console.log(test);
-      console.log(head);
-      while(i<number){
-        currentNode = currentNode.next;
-        i++;
+    var currentNode = head;
+
+    while(i<number){
+
+      if(currentNode.next === null && i+1<=number){
+        return false;
       }
-      return head;
+      currentNode = currentNode.next;
+      i++;
+    }
+
+    return currentNode;
+
+
+
+
   };
 
   module.remove = function(number){
+
+    if(module.get(number)===getHead()){
+      head=module.get(number+1);
+    }
+    else if (module.get(number)===getTail()){
+      tail = module.get(number-1);
+      getTail().next=null;
+    }
+    else{
+      var thePrevNumFromRemoveNum = module.get(number-1);
+
+      thePrevNumFromRemoveNum.next = module.get(number+1);
+    }
+
 
   };
 
@@ -62,82 +83,16 @@ function linkedListGenerator(){
   module.insert = function(Value,number){
 
   };
-
   return module;
 }
 
 
 // console.log(linkedListGenerator().getHead());
 var one = linkedListGenerator();
-console.log(one.add('bomber'));
-console.log(one.getHead());
-
-console.log(one.add('man'));
-console.log(one.add('Playstation'));
-console.log(one.add('console'));
-
-console.log(one.get(2));
+one.add('bomber');
+one.add('man');
+one.add('Playstation');
+one.add('console');
 
 
-
-
-
-
-
-// function linkedListGenerator(){
-//   var poo = {
-//     value:null,
-//     next:null
-//   };
-
-
-//     return {
-//       getHead:function(){
-//         var getPoo = poo.value;
-//         return getPoo;
-//       },
-
-
-//       getTail:function(){
-
-
-
-//       },
-
-//       add:function(value){
-//         var node = poo;
-//         node.checker = false;
-//         while(node.checker===false){
-//           if(node.next===null){
-//             var insideNode = {};
-//             insideNode.value = value;
-//             insideNode.next = null;
-//             node.checker = true;
-//             node.next = insideNode;
-//             return insideNode;
-//           }
-
-//           else {
-//             var tail = {};
-//             node.next = tail;
-//             return tail;
-//           }
-
-//         }
-
-// //       },
-
-// //       remove:function(number){
-
-// //       },
-
-// //       get:function(number){
-
-// //       },
-
-// //       insert:function(value,number){
-
-// //       }
-// //     };
-// // }
-
+one.get(1);
