@@ -9,6 +9,7 @@ function linkedListGenerator(){
   var tail = null;
   var test = 0;
   var module = {};
+  var length = 0;
 
 
   module.getHead = function(){
@@ -29,17 +30,26 @@ function linkedListGenerator(){
     if(head===null&&tail===null){
       head=newNodeObject;
       tail=newNodeObject;
+      length++;
       return newNodeObject;
     }
     else{
       tail.next=newNodeObject;
       tail=newNodeObject;
+      length++;
       return newNodeObject;
     }
+
+
+  };
+
+  module.getLength = function(){
+    return length;
   };
 
   module.get = function(number){
     var i=0;
+    var getLength = 0;
     if(number===0){
      return head;
     }
@@ -59,17 +69,15 @@ function linkedListGenerator(){
 
   module.remove = function(number){
     if(module.get(number)===module.getHead()){
-        head=module.get(number+1);
 
-        console.log(head);
-        console.log('the head is true');
+        head=module.get(number+1);
+        length--;
         return head;
     }
     else if(module.get(number)===module.getTail()){
         tail = module.get(number-1);
         tail.next = null;
-        console.log(tail);
-        console.log('the tail is true also');
+        length--;
         return tail;
     }
 
@@ -81,9 +89,8 @@ function linkedListGenerator(){
         var prior = module.get(number-1);
         var after = module.get(number+1);
         prior.next = after;
-        console.log(prior);
-        console.log(after);
-        console.log(head);
+
+
     }
 
 
@@ -98,34 +105,60 @@ function linkedListGenerator(){
   };
 
   module.insert = function(Value,number){
+    if((number)>=(module.getLength())){
+      return false;
+    }
 
-    if(module.get(number)===module.getHead()){
+    else if(number < 0){
+      return false;
+    }
+
+    else if(module.get(number)===module.getHead()){
         var insideTheNode = module.createNode(Value);
         insideTheNode.next = module.get(0);
         head = insideTheNode;
-        console.log(insideTheNode);
-        console.log(head);
-        return insideTheNoede;
+        length++;
+        return insideTheNode;
     }
-    else if(module.get(number)===module.getTail()){
+    else if(module.get(number-1)===module.getTail()){
         var willBeTheBack = module.createNode(Value);
         var theBack = module.getTail();
         theBack.next = willBeTheBack;
         tail = willBeTheBack;
-        console.log(theBack);
-        console.log(tail);
+        length++;
         return willBeTheBack;
     }
 
+
+
     else {
         var inTheMiddle = module.createNode(Value);
-        inTheMiddle.next = module.get(number+1);
-        module.get(number).next =inTheMiddle;
-        console.log(inTheMiddle);
+        inTheMiddle.next = module.get(number);
+        module.get(number-1).next =inTheMiddle;
+        length++;
+        return inTheMiddle;
     }
 
 
   };
+
+  // var saveButton = document.getElementById('save');
+  // saveButton.addEventListener('click',function(){
+  //   var textInput = document.getElementById('textInput');
+  //   var newOne = one.createNode('kainoa');
+
+  //   newOne.next = one.getHead();
+
+  //   head = newOne;
+  //   return head;
+  // });
+
+  // var deleteButton = document.getElementById('delete');
+  // deleteButton.addEventListener('click',function(){
+  //   var goingToDelete = getHead();
+  //   get
+  // });
+
   return module;
 }
 
@@ -137,6 +170,26 @@ one.add('man');
 one.add('Playstation');
 one.add('console');
 
-one.insert('kainoa',2);
-console.log(one.getHead());
+console.log(one.insert('kainoa',3));
+console.log("");
+
+console.log('ohohohohho');
+console.log("");
+
+
+console.log(one.get(0));
+console.log('');
+console.log(one.get(1));
+console.log('');
+console.log(one.get(2));
+console.log('');
+console.log(one.get(3));
+console.log('');
+console.log(one.get(4));
+console.log('');
+console.log(one.getLength());
+console.log('');
+
+
+
 
